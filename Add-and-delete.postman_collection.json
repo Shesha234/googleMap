@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "66a6cfff-213c-4938-a437-2fffcb8f81c3",
+		"name": "Add-and-delete",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Google map",
+			"item": [
+				{
+					"name": "Add",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"sTATUS\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"SCOPE\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"APP\");\r",
+									"});\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Status\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"place_id\", jsonData.place_id);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"location\":{\r\n\r\n        \"lat\" : -38.383494,\r\n\r\n        \"lng\" : 33.427362\r\n\r\n    },\r\n\r\n    \"accuracy\":50,\r\n\r\n    \"name\":\"Frontline house\",\r\n\r\n    \"phone_number\":\"(+91) 983 893 3937\",\r\n\r\n    \"address\" : \"29, side layout, cohen 09\",\r\n\r\n    \"types\": [\"shoe park\",\"shop\"],\r\n\r\n    \"website\" : \"http://google.com\",\r\n\r\n    \"language\" : \"French-IN\"\r\n\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://216.10.245.166/maps/api/place/add/json?key= qaclick123",
+							"protocol": "http",
+							"host": [
+								"216",
+								"10",
+								"245",
+								"166"
+							],
+							"path": [
+								"maps",
+								"api",
+								"place",
+								"add",
+								"json"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": " qaclick123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.get(\"variable_key\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"place_id\":\"{{place_id}}\"          \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://216.10.245.166/maps/api/place/delete/json?key=qaclick123",
+							"protocol": "http",
+							"host": [
+								"216",
+								"10",
+								"245",
+								"166"
+							],
+							"path": [
+								"maps",
+								"api",
+								"place",
+								"delete",
+								"json"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "qaclick123"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "https://ecommerceservice.herokuapp.com/orders/62283617d7cea500172f1192",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI5NzhjZjRmZTM0NzAwMTc3ZmUyMDIiLCJpYXQiOjE2NDY4ODUwOTIsImV4cCI6MTY0Njk3MTQ5Mn0.7tX_oTF-gQPvfwhcOsiiN_FPwP_WLOczNJ3CukHi1zE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"product\": \"622981024fe34700177fe218\", \r\n\t\"quantity\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ecommerceservice.herokuapp.com/orders/62283617d7cea500172f1192",
+					"protocol": "https",
+					"host": [
+						"ecommerceservice",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders",
+						"62283617d7cea500172f1192"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
